@@ -1,2 +1,2 @@
-# Guitar Web Application
-An interactive guitar app that is meant to simulate a guitar in JavaScript. Also uses React, Vite, and the Web Audio API.
+#Guitar Project
+A guitar web application made with React, Vite, and the Web Audio API.
