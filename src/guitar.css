@@ -1,5 +1,7 @@
 body {
     background-color:#242424;
+    display:flex;
+    flex-direction: column;
 }
 
 p {
@@ -22,12 +24,14 @@ p {
 }
 
 #fretBoard {
-    display: inline-grid;
+    margin: auto;
+    display: grid;
     grid-template-columns: auto auto auto auto auto auto;
     background-color: saddlebrown;
     justify-content: space-evenly;
     gap: 7px 2px;
     width: 300px;
+    
 }
 
 .fret {
@@ -40,10 +44,9 @@ p {
 }
 
 #gtrStringDiv {
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto auto auto auto auto;
     background-color: sandybrown;
-    padding: 5px;
     width: 300px;
 }
 
