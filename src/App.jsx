@@ -3,15 +3,15 @@ import './guitar.css'
 
 export default function App() {
   const strings = [`lowStringE`, `stringA`, `stringD`, `stringG`, `stringB`, `highStringE`];
-  const frets = Array.from({length:22}, (_,i) => i);
+  const frets = Array.from({length:22}, (_,i) => i + 1);
   const waveType = `sawtooth`; // Determine type of wave used for the oscillators
   const [selectedFrets, setSelectedFrets] = useState({
-    lowStringE: 1,
-    stringA: 1,
-    stringD: 1,
-    stringG: 1,
-    stringB: 1,
-    highStringE: 1
+    lowStringE: 0,
+    stringA: 0,
+    stringD: 0,
+    stringG: 0,
+    stringB: 0,
+    highStringE: 0
   })
   const handleFretSelect = (stringName, fretNum) => {
     setSelectedFrets((prev) => ({
@@ -39,7 +39,7 @@ export default function App() {
                     Open
                 </label>
                 {frets.map((fretNum) => (
-                    <div key={'${stringName}-fret-${fretNum}'} className="fret">
+                    <div key={`${stringName}-fret-${fretNum}`} className="fret">
                         <input
                             type="radio"
                             name={stringName}
@@ -67,7 +67,7 @@ export default function App() {
         })}
         </div>
     </div>
-    <div class="chordDD">
+    {/* <div class="chordDD">
         <div id="chordName">
             <select id="chordSelect" name="Chord" value="Chord">
                 <option value="" selected="selected">Please select a chord</option>
@@ -79,11 +79,12 @@ export default function App() {
             </select>
             <button id="chordSubmit">Submit</button>
         </div>
-    </div>
+    </div> */}
     </div>
   );
 
   function strumGuitar(stringName, fretNum) {
+    console.log(fretNum);
     const baseFrequency = 82.41;
     const hsFromE2 = {
                         lowStringE: 0, 
@@ -94,10 +95,10 @@ export default function App() {
                         highStringE: 24
                     }
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const semitoneOffset = hsFromE2[stringName] + fretNum + 1;
+    const semitoneOffset = hsFromE2[stringName] + fretNum;
     const frequency = baseFrequency * Math.pow(2, semitoneOffset/12);
     const osc = audioContext.createOscillator();
-    osc.type = 'sawtooth';
+    osc.type = waveType;
     osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
 
     const gainNode = audioContext.createGain();
